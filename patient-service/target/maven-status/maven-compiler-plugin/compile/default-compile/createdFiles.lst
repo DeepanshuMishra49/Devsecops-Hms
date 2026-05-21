@@ -1,0 +1,6 @@
+com\hospital\patient\PatientApplication.class
+com\hospital\patient\PatientService.class
+com\hospital\patient\Patient.class
+com\hospital\patient\PatientRestController.class
+com\hospital\patient\PatientViewController.class
+com\hospital\patient\PatientRepository.class

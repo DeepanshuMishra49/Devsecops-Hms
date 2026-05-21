@@ -1,0 +1,6 @@
+com\hospital\doctor\DoctorRestController.class
+com\hospital\doctor\DoctorService.class
+com\hospital\doctor\DoctorViewController.class
+com\hospital\doctor\DoctorApplication.class
+com\hospital\doctor\Doctor.class
+com\hospital\doctor\DoctorRepository.class

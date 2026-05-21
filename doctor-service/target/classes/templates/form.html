@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${isEdit} ? 'Edit Doctor' : 'Add New Doctor'">Doctor Form</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link th:href="@{/css/style.css}" rel="stylesheet">
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark">
+    <div class="container">
+        <a class="navbar-brand d-flex align-items-center" href="http://localhost:18080">
+            <div class="brand-icon me-2"><i class="bi bi-heart-pulse-fill"></i></div>
+            <div><span class="brand-name">HMS</span><span class="brand-sub d-none d-md-inline">Hospital Management System</span></div>
+        </a>
+        <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"><span class="navbar-toggler-icon"></span></button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item"><a class="nav-link" href="http://localhost:18080"><i class="bi bi-house-fill me-1"></i> Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="http://localhost:8081/patients"><i class="bi bi-people-fill me-1"></i> Patients</a></li>
+                <li class="nav-item"><a class="nav-link active" href="/doctors"><i class="bi bi-person-badge-fill me-1"></i> Doctors</a></li>
+                <li class="nav-item"><a class="nav-link" href="http://localhost:8083/appointments"><i class="bi bi-calendar-check-fill me-1"></i> Appointments</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="mb-0">
+                        <i class="bi" th:classappend="${isEdit} ? 'bi-pencil-square' : 'bi-plus-circle'"></i>
+                        <span th:text="${isEdit} ? 'Edit Doctor' : 'Add New Doctor'">Doctor Form</span>
+                    </h4>
+                </div>
+                <div class="card-body p-4">
+                    <form th:action="${isEdit} ? @{/doctors/update/{id}(id=${doctor.id})} : @{/doctors}" th:object="${doctor}" method="post" novalidate>
+                        <div class="mb-3">
+                            <label for="name" class="form-label"><i class="bi bi-person me-1"></i> Full Name <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" id="name" th:field="*{name}" placeholder="Enter doctor's full name" th:classappend="${#fields.hasErrors('name')} ? 'is-invalid' : ''">
+                            <div class="invalid-feedback" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name error</div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="email" class="form-label"><i class="bi bi-envelope me-1"></i> Email Address <span class="text-danger">*</span></label>
+                            <input type="email" class="form-control" id="email" th:field="*{email}" placeholder="Enter email address" th:classappend="${#fields.hasErrors('email')} ? 'is-invalid' : ''">
+                            <div class="invalid-feedback" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Email error</div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="specialization" class="form-label"><i class="bi bi-heart-pulse me-1"></i> Specialization <span class="text-danger">*</span></label>
+                            <select class="form-select" id="specialization" th:field="*{specialization}" th:classappend="${#fields.hasErrors('specialization')} ? 'is-invalid' : ''">
+                                <option value="">-- Select Specialization --</option>
+                                <option value="Cardiology">Cardiology</option>
+                                <option value="Dermatology">Dermatology</option>
+                                <option value="Endocrinology">Endocrinology</option>
+                                <option value="Gastroenterology">Gastroenterology</option>
+                                <option value="Neurology">Neurology</option>
+                                <option value="Oncology">Oncology</option>
+                                <option value="Orthopedics">Orthopedics</option>
+                                <option value="Pediatrics">Pediatrics</option>
+                                <option value="Psychiatry">Psychiatry</option>
+                                <option value="Radiology">Radiology</option>
+                                <option value="Surgery">Surgery</option>
+                                <option value="Urology">Urology</option>
+                                <option value="General Medicine">General Medicine</option>
+                            </select>
+                            <div class="invalid-feedback" th:if="${#fields.hasErrors('specialization')}" th:errors="*{specialization}">Specialization error</div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="phone" class="form-label"><i class="bi bi-telephone me-1"></i> Phone Number <span class="text-danger">*</span></label>
+                                <input type="tel" class="form-control" id="phone" th:field="*{phone}" placeholder="Enter phone number" th:classappend="${#fields.hasErrors('phone')} ? 'is-invalid' : ''">
+                                <div class="invalid-feedback" th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}">Phone error</div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="experience" class="form-label"><i class="bi bi-briefcase me-1"></i> Experience (Years) <span class="text-danger">*</span></label>
+                                <input type="number" class="form-control" id="experience" th:field="*{experience}" placeholder="Years of experience" min="0" max="60" th:classappend="${#fields.hasErrors('experience')} ? 'is-invalid' : ''">
+                                <div class="invalid-feedback" th:if="${#fields.hasErrors('experience')}" th:errors="*{experience}">Experience error</div>
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-between mt-4">
+                            <a href="/doctors" class="btn btn-outline-secondary"><i class="bi bi-arrow-left me-1"></i> Cancel</a>
+                            <button type="submit" class="btn btn-primary">
+                                <i class="bi" th:classappend="${isEdit} ? 'bi-check-circle' : 'bi-plus-circle'"></i>
+                                <span th:text="${isEdit} ? 'Update Doctor' : 'Save Doctor'">Submit</span>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<footer class="footer mt-5">
+    <div class="container"><div class="row align-items-center">
+        <div class="col-md-6"><div class="footer-brand"><i class="bi bi-heart-pulse-fill me-2"></i><strong>Hospital Management System</strong></div><p class="footer-text mt-2">Doctor Service v1.0.0</p></div>
+        <div class="col-md-6 text-md-end"><p class="footer-text mb-0">&copy; 2026 Hospital Management System</p></div>
+    </div></div>
+</footer>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
