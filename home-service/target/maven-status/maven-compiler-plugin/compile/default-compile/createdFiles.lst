@@ -1,2 +1,8 @@
-com\hospital\home\HomeApplication.class
+com\hospital\home\config\SecurityConfig.class
+com\hospital\home\repository\UserRepository.class
+com\hospital\home\model\User.class
+com\hospital\home\controller\AuthController.class
+com\hospital\home\service\CustomUserDetailsService.class
 com\hospital\home\HomeController.class
+com\hospital\home\HomeApplication.class
+com\hospital\home\service\DataInitializer.class

@@ -28,24 +28,43 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav ms-auto">
+            <ul class="navbar-nav ms-auto align-items-center">
                 <li class="nav-item">
                     <a class="nav-link active" href="/"><i class="bi bi-house-fill me-1"></i> Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" th:href="${patientServiceUrl + '/patients'}">
+                    <a class="nav-link" href="http://localhost:8081/patients">
                         <i class="bi bi-people-fill me-1"></i> Patients
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" th:href="${doctorServiceUrl + '/doctors'}">
+                    <a class="nav-link" href="http://localhost:8082/doctors">
                         <i class="bi bi-person-badge-fill me-1"></i> Doctors
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" th:href="${appointmentServiceUrl + '/appointments'}">
+                    <a class="nav-link" href="http://localhost:8083/appointments">
                         <i class="bi bi-calendar-check-fill me-1"></i> Appointments
                     </a>
+                </li>
+                <!-- Logged in User Dropdown -->
+                <li class="nav-item dropdown ms-lg-3" th:if="${currentUser != null}">
+                    <a class="nav-link dropdown-toggle d-flex align-items-center gap-2 bg-white bg-opacity-10 px-3 py-2 rounded-3" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="bi bi-person-circle fs-5 text-primary"></i>
+                        <span class="text-white fw-bold" th:text="${currentUser.fullName}">John Doe</span>
+                        <span class="badge bg-primary bg-opacity-25 text-primary border border-primary border-opacity-50 small" style="font-size: 0.7rem;" th:text="${#strings.replace(currentUser.role, 'ROLE_', '')}">USER</span>
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end dropdown-menu-dark border border-secondary border-opacity-20 shadow mt-2" aria-labelledby="userDropdown">
+                        <li><span class="dropdown-item-text text-secondary small">Signed in as <br><strong class="text-white" th:text="${currentUser.username}">username</strong></span></li>
+                        <li><hr class="dropdown-divider border-secondary border-opacity-20"></li>
+                        <li>
+                            <form th:action="@{/logout}" method="post" class="m-0">
+                                <button type="submit" class="dropdown-item text-danger d-flex align-items-center gap-2" style="background: none; border: none; width: 100%; text-align: left;">
+                                    <i class="bi bi-box-arrow-right"></i> Logout
+                                </button>
+                            </form>
+                        </li>
+                    </ul>
                 </li>
             </ul>
         </div>
@@ -164,7 +183,7 @@
                         <li><i class="bi bi-check-circle-fill text-success me-2"></i>Contact management</li>
                         <li><i class="bi bi-check-circle-fill text-success me-2"></i>REST API endpoints</li>
                     </ul>
-                    <a th:href="${patientServiceUrl + '/patients'}" class="btn btn-service patient-btn w-100">
+                    <a href="http://localhost:8081/patients" class="btn btn-service patient-btn w-100">
                         <i class="bi bi-arrow-right-circle me-2"></i>Manage Patients
                     </a>
                 </div>
@@ -197,7 +216,7 @@
                         <li><i class="bi bi-check-circle-fill text-success me-2"></i>13+ medical specialties</li>
                         <li><i class="bi bi-check-circle-fill text-success me-2"></i>REST API endpoints</li>
                     </ul>
-                    <a th:href="${doctorServiceUrl + '/doctors'}" class="btn btn-service doctor-btn w-100">
+                    <a href="http://localhost:8082/doctors" class="btn btn-service doctor-btn w-100">
                         <i class="bi bi-arrow-right-circle me-2"></i>Manage Doctors
                     </a>
                 </div>
@@ -230,7 +249,7 @@
                         <li><i class="bi bi-check-circle-fill text-success me-2"></i>Cross-service integration</li>
                         <li><i class="bi bi-check-circle-fill text-success me-2"></i>REST API endpoints</li>
                     </ul>
-                    <a th:href="${appointmentServiceUrl + '/appointments'}" class="btn btn-service appointment-btn w-100">
+                    <a href="http://localhost:8083/appointments" class="btn btn-service appointment-btn w-100">
                         <i class="bi bi-arrow-right-circle me-2"></i>Manage Appointments
                     </a>
                 </div>
@@ -266,8 +285,8 @@
             <div class="col-md-3 col-6">
                 <div class="tech-card text-center">
                     <div class="tech-icon"><i class="bi bi-database-fill"></i></div>
-                    <h5>H2 Database</h5>
-                    <p class="text-muted small">In-Memory</p>
+                    <h5>PostgreSQL</h5>
+                    <p class="text-muted small">Relational DB</p>
                 </div>
             </div>
             <div class="col-md-3 col-6">
@@ -315,7 +334,7 @@
                         <div class="diagram-footer">
                             <div class="diagram-db">
                                 <i class="bi bi-database-fill me-2"></i>
-                                H2 In-Memory Database (per service)
+                                PostgreSQL Database (shared)
                             </div>
                         </div>
                     </div>
@@ -344,7 +363,7 @@
                 <div class="feature-item">
                     <div class="feature-icon"><i class="bi bi-speedometer2"></i></div>
                     <h5>Performant</h5>
-                    <p>Lightweight microservices with H2 in-memory databases for blazing-fast operations</p>
+                    <p>Lightweight microservices powered by a high-performance PostgreSQL relational database</p>
                 </div>
             </div>
             <div class="col-md-4 col-sm-6">
