@@ -13,14 +13,15 @@ import org.springframework.web.client.RestTemplate;
 @Controller
 public class HomeController {
 
-    @Value("${patient.service.url:http://localhost:8081}")
+    @Value("${patient.service.url:http://43.205.207.100:8081}")
     private String patientServiceUrl;
 
-    @Value("${doctor.service.url:http://localhost:8082}")
+    @Value("${doctor.service.url:http://43.205.207.100:8082}")
     private String doctorServiceUrl;
 
-    @Value("${appointment.service.url:http://localhost:8083}")
+    @Value("${appointment.service.url:http://43.205.207.100:8083}")
     private String appointmentServiceUrl;
+
 
     private final UserRepository userRepository;
     private final RestTemplate restTemplate = new RestTemplate();
