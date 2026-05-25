@@ -20,11 +20,11 @@ spring:
 
 patient:
   service:
-    url: http://localhost:8081
+    url: http://43.204.251.193:8081
 
 doctor:
   service:
-    url: http://localhost:8082
+    url: http://43.204.251.193:8082
 
 management:
   endpoints:

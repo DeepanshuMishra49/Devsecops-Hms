@@ -22,10 +22,10 @@ public class AppointmentService {
     @Autowired
     private RestTemplate restTemplate;
 
-    @Value("${patient.service.url:http://localhost:8081}")
+    @Value("${patient.service.url:http://43.204.251.193:8081}")
     private String patientServiceUrl;
 
-    @Value("${doctor.service.url:http://localhost:8082}")
+    @Value("${doctor.service.url:http://43.204.251.193:8082}")
     private String doctorServiceUrl;
 
     public List<Appointment> getAllAppointments() {

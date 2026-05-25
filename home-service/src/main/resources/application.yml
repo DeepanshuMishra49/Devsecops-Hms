@@ -17,15 +17,15 @@ spring:
 
 patient:
   service:
-    url: http://43.205.207.100:8081
+    url: http://43.204.251.193:8081
 
 doctor:
   service:
-    url: http://43.205.207.100:8082
+    url: http://43.204.251.193:8082
 
 appointment:
   service:
-    url: http://43.205.207.100:8083
+    url: http://43.204.251.193:8083
 
 management:
   endpoints:
